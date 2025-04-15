@@ -105,4 +105,11 @@ export const useAuthStore = create((set) => ({
   },
 }));
 
+// Reinitialize auth state from localStorage
+const token = localStorage.getItem("token");
+if (token) {
+  useAuthStore.getState().authUser = JSON.parse(localStorage.getItem("user"));
+  useAuthStore.getState().isLoggedIn = true;
+}
+
 

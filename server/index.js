@@ -5,6 +5,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import authRoutes from "./routes/authRoutes.js";
 import fileUpload from "express-fileupload";
+import skillExchangeRoutes from './routes/skillExchangeRoutes.js';
+import serviceRequestRoutes from './routes/serviceRequestRoutes.js';
 
 // Load environment variables
 dotenv.config();
@@ -33,6 +35,8 @@ app.use(
 
 // Use your authentication routes (your authenticator middleware remains in your middleware folder)
 app.use("/api/auth", authRoutes);
+app.use('/api/skill-exchange', skillExchangeRoutes);
+app.use('/api/service-requests', serviceRequestRoutes);
 
 const PORT = 4040;
 app.listen(PORT, () => {

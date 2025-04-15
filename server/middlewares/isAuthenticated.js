@@ -16,7 +16,7 @@ export const isAuthenticated = (req, res, next) => {
     // Verify token using the secret from environment variables
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     // Attach the decoded payload to the request object for further use
-    req.user = decoded;
+    req.user = { id: decoded.userId }; // Ensure the user ID is set
     next(); // Proceed to the next middleware or route handler
   } catch (error) {
     return res

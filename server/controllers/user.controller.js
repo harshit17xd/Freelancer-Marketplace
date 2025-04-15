@@ -189,3 +189,17 @@ export const updateUserProfile = async (req, res) => {
     res.status(500).json({ message: "Server error." });
   }
 };
+
+// Function to match users based on skills
+export const matchUsersBySkills = async (req, res) => {
+  try {
+    const { skills } = req.body;
+    const matchedUsers = await User.aggregate([
+      { $match: { skills: { $in: skills } } },
+      { $project: { name: 1, email: 1, skills: 1 } }
+    ]);
+    res.status(200).json(matchedUsers);
+  } catch (error) {
+    res.status(500).json({ error: 'Error matching users by skills' });
+  }
+};
